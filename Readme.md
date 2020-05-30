@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Никита Лесняк](https://up.htmlacademy.ru/javascript/20/user/1414069).
-* Наставник: `Неизвестно`.
+* Наставник: Магомед Кандаев.
 
 ---
 

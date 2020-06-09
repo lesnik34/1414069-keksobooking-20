@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var TITLE = ['Краски Отель', 'Отель Оазис Зип ', 'LUNA Hotel Krasnodar', 'D Hotel', 'Отель Терем', 'Home-otel', 'Отель Коржовъ', 'Hostel on Kostyleva', 'Golden Tulip Krasnodar'];
 var PRICE_RANGE = [2000, 7000];
@@ -12,13 +12,11 @@ var DESCRIPTION = 'Описание';
 var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 var HOTELS_COUNT = 8;
 
-
-
 var getHotels = function () {
   var hotels = [];
   var map = document.querySelector('.map');
 
-  for (var i = 0; i < HOTELS_COUNT; i++){
+  for (var i = 0; i < HOTELS_COUNT; i++) {
     var valueX = getRandomInRange(50, map.offsetWidth - 50);
     var valueY = getRandomInRange(130, 630);
 
@@ -33,8 +31,8 @@ var getHotels = function () {
         'type': TYPE[getRandomInRange(0, TYPE.length - 1)],
         'rooms': getRandomInRange(ROOMS_RANGE[0], ROOMS_RANGE[1]),
         'guests': getRandomInRange(GUESTS_RANGE[0], GUESTS_RANGE[1]),
-        'checkin': CHECKIN[0, CHECKIN.length - 1],
-        'checkout': CHECKOUT[0, CHECKOUT.length - 1],
+        'checkin': CHECKIN[getRandomInRange(0, CHECKIN.length - 1)],
+        'checkout': CHECKOUT[getRandomInRange(0, CHECKOUT.length - 1)],
         'features': getRandomArrayCopy(FEATURES),
         'description': DESCRIPTION,
         'photos': getRandomArrayCopy(PHOTOS)
@@ -49,16 +47,16 @@ var getHotels = function () {
   return hotels;
 };
 
-var getRandomInRange = function(min, max) {
+var getRandomInRange = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
 var getRandomArrayCopy = function (items) {
   var copyItems = [];
   var randomLength = getRandomInRange(0, items.length - 1);
-  for (var i = 0; i < randomLength; i++){
+  for (var i = 0; i < randomLength; i++) {
     copyItems[i] = items[i];
-  };
+  }
   return copyItems;
 };
 
@@ -84,7 +82,7 @@ var renderPins = function (hotels) {
   for (var i = 0; i < hotels.length; i++) {
     var pin = createPin(hotels[i]);
     fragment.appendChild(pin);
-  };
+  }
   return fragment;
 };
 

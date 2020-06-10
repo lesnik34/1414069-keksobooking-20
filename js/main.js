@@ -1,40 +1,83 @@
 'use strict';
 
-var TITLE = ['Краски Отель', 'Отель Оазис Зип ', 'LUNA Hotel Krasnodar', 'D Hotel', 'Отель Терем', 'Home-otel', 'Отель Коржовъ', 'Hostel on Kostyleva', 'Golden Tulip Krasnodar'];
-var PRICE_RANGE = [2000, 7000];
-var TYPE = ['palace', 'flat', 'house', 'bungalo'];
-var ROOMS_RANGE = [1, 4];
-var GUESTS_RANGE = [1, 5];
-var CHECKIN = ['12:00', '13:00', '14:00'];
-var CHECKOUT = ['12:00', '13:00', '14:00'];
+var ROOMS_RANGE = {
+  min: 1,
+  max: 1
+};
+var GUESTS_RANGE = {
+  min: 1,
+  max: 5
+};
+var PRICES_RANGE = {
+  min: 2000,
+  max: 7000
+};
+var ORDINATE = {
+  start: 130,
+  end: 630
+};
+var ABSCISSA = {
+  start: 0,
+  end: 1200
+};
+
+var PIN_WIDTH_HALF = 25;
+var PIN_HEIGHT = 70;
+var TITLES = ['Краски Отель', 'Отель Оазис Зип ', 'LUNA Hotel Krasnodar', 'D Hotel', 'Отель Терем', 'Home-otel', 'Отель Коржовъ', 'Hostel on Kostyleva', 'Golden Tulip Krasnodar'];
+var TYPES = ['palace', 'flat', 'house', 'bungalo'];
+var CHECKINS = ['12:00', '13:00', '14:00'];
+var CHECKOUTS = ['12:00', '13:00', '14:00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-var DESCRIPTION = 'Описание';
+var DESCRIPTIONS = 'Описание';
 var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 var HOTELS_COUNT = 8;
 
-var getHotels = function () {
-  var hotels = [];
-  var map = document.querySelector('.map');
+var getRandomInRange = function (min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
 
-  for (var i = 0; i < HOTELS_COUNT; i++) {
-    var valueX = getRandomInRange(50, map.offsetWidth - 50);
-    var valueY = getRandomInRange(130, 630);
+function getShuffledArray(items) {
+  for (var i = items.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var save = items[i];
+    items[i] = items[j];
+    items[j] = items[save];
+  }
+}
+
+var getRandomArrayCopy = function (items) {
+  getShuffledArray(items);
+  var randomLength = getRandomInRange(0, items.length - 1);
+  return items.slice(0, randomLength);
+};
+
+var getRandomElement = function (items) {
+  var randomIndex = getRandomInRange(0, items.length - 1);
+  return items[randomIndex];
+};
+
+var getHotels = function (hotelsCount) {
+  var hotels = [];
+
+  for (var i = 1; i <= hotelsCount; i++) {
+    var valueX = getRandomInRange(ABSCISSA.start, ABSCISSA.end);
+    var valueY = getRandomInRange(ORDINATE.start, ORDINATE.end);
 
     hotels.push({
       'author': {
-        'avatar': 'img/avatars/user0' + (i + 1) + '.png'
+        'avatar': 'img/avatars/user0' + i + '.png'
       },
       'offer': {
-        'title': TITLE[getRandomInRange(0, TITLE.length - 1)],
+        'title': getRandomElement(TITLES),
         'address': valueX + ', ' + valueY,
-        'price': getRandomInRange(PRICE_RANGE[0], PRICE_RANGE[1]),
-        'type': TYPE[getRandomInRange(0, TYPE.length - 1)],
-        'rooms': getRandomInRange(ROOMS_RANGE[0], ROOMS_RANGE[1]),
-        'guests': getRandomInRange(GUESTS_RANGE[0], GUESTS_RANGE[1]),
-        'checkin': CHECKIN[getRandomInRange(0, CHECKIN.length - 1)],
-        'checkout': CHECKOUT[getRandomInRange(0, CHECKOUT.length - 1)],
+        'price': getRandomInRange(PRICES_RANGE.min, PRICES_RANGE.max),
+        'type': getRandomElement(TYPES),
+        'rooms': getRandomInRange(ROOMS_RANGE.min, ROOMS_RANGE.max),
+        'guests': getRandomInRange(GUESTS_RANGE.min, GUESTS_RANGE.max),
+        'checkin': getRandomElement(CHECKINS),
+        'checkout': getRandomElement(CHECKOUTS),
         'features': getRandomArrayCopy(FEATURES),
-        'description': DESCRIPTION,
+        'description': DESCRIPTIONS,
         'photos': getRandomArrayCopy(PHOTOS)
       },
       'location': {
@@ -47,19 +90,6 @@ var getHotels = function () {
   return hotels;
 };
 
-var getRandomInRange = function (min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-var getRandomArrayCopy = function (items) {
-  var copyItems = [];
-  var randomLength = getRandomInRange(0, items.length - 1);
-  for (var i = 0; i < randomLength; i++) {
-    copyItems[i] = items[i];
-  }
-  return copyItems;
-};
-
 var activateMap = function () {
   var map = document.querySelector('.map');
   map.classList.remove('.map--faded');
@@ -69,8 +99,8 @@ var createPin = function (hotel) {
   var templatePin = document.querySelector('#pin').content.querySelector('.map__pin');
   var pinClone = templatePin.cloneNode(true);
   var pinImg = pinClone.querySelector('img');
-  pinClone.style.top = hotel.location.y + 70 + 'px';
-  pinClone.style.left = hotel.location.x + 25 + 'px';
+  pinClone.style.top = hotel.location.y - PIN_HEIGHT + 'px';
+  pinClone.style.left = hotel.location.x - PIN_WIDTH_HALF + 'px';
   pinImg.src = hotel.author.avatar;
   pinImg.alt = hotel.offer.title;
 
@@ -79,15 +109,15 @@ var createPin = function (hotel) {
 
 var renderPins = function (hotels) {
   var fragment = document.createDocumentFragment();
-  for (var i = 0; i < hotels.length; i++) {
-    var pin = createPin(hotels[i]);
+  var mapPins = document.querySelector('.map__pins');
+  hotels.forEach(function (element) {
+    var pin = createPin(element);
     fragment.appendChild(pin);
-  }
-  return fragment;
+  });
+  mapPins.appendChild(fragment);
 };
 
 activateMap();
-var hotels = getHotels();
-var fragment = renderPins(hotels);
-var mapPins = document.querySelector('.map__pins');
-mapPins.appendChild(fragment);
+var hotels = getHotels(HOTELS_COUNT);
+renderPins(hotels);
+

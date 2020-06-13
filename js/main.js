@@ -28,7 +28,7 @@ var TYPES = ['palace', 'flat', 'house', 'bungalo'];
 var CHECKINS = ['12:00', '13:00', '14:00'];
 var CHECKOUTS = ['12:00', '13:00', '14:00'];
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-var DESCRIPTIONS = 'Описание';
+var DESCRIPTION = 'Описание';
 var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 var HOTELS_COUNT = 8;
 
@@ -37,18 +37,21 @@ var getRandomInRange = function (min, max) {
 };
 
 function getShuffledArray(items) {
-  for (var i = items.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * (i + 1));
-    var save = items[i];
-    items[i] = items[j];
-    items[j] = items[save];
+  var newItems = items.slice();
+  for (var i = newItems.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * newItems.length);
+    var save = newItems[i];
+    newItems[i] = newItems[j];
+    newItems[j] = newItems[save];
   }
+
+  return newItems;
 }
 
 var getRandomArrayCopy = function (items) {
-  getShuffledArray(items);
-  var randomLength = getRandomInRange(0, items.length - 1);
-  return items.slice(0, randomLength);
+  var newItems = getShuffledArray(items);
+  var randomLength = getRandomInRange(0, newItems.length - 1);
+  return newItems.slice(0, randomLength + 1);
 };
 
 var getRandomElement = function (items) {
@@ -77,7 +80,7 @@ var getHotels = function (hotelsCount) {
         'checkin': getRandomElement(CHECKINS),
         'checkout': getRandomElement(CHECKOUTS),
         'features': getRandomArrayCopy(FEATURES),
-        'description': DESCRIPTIONS,
+        'description': DESCRIPTION,
         'photos': getRandomArrayCopy(PHOTOS)
       },
       'location': {

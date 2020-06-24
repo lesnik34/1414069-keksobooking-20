@@ -50,8 +50,8 @@ function getShuffledArray(items) {
 
 var getRandomArrayCopy = function (items) {
   var newItems = getShuffledArray(items);
-  var randomLength = getRandomInRange(0, newItems.length - 1);
-  return newItems.slice(0, randomLength + 1);
+  var randomLength = getRandomInRange(1, newItems.length);
+  return newItems.slice(0, randomLength);
 };
 
 var getRandomElement = function (items) {

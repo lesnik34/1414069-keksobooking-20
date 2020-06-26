@@ -104,7 +104,7 @@ var activateMap = function () {
   setAddress();
 
   mapPinMain.removeEventListener('mousedown', catchLeftMouseButton);
-  mapPinMain.removeEventListener('keydown', onMapPinPressEnter );
+  mapPinMain.removeEventListener('keydown', onMapPinPressEnter);
 
   var hotels = getHotels(HOTELS_COUNT);
   renderPins(hotels);
@@ -136,25 +136,25 @@ var catchLeftMouseButton = function (evt) {
   if (evt.which === 1) {
     activateMap();
   }
-}
+};
 
 var onMapPinPressEnter = function (evt) {
   if (evt.code === 'Enter') {
     activateMap();
   }
-}
+};
 
 var disableElements = function (elements) {
-  elements.forEach((element) => {
+  elements.forEach(function (element) {
     element.disabled = true;
-  })
-}
+  });
+};
 
 var enableElements = function (elements) {
-  elements.forEach((element) => {
+  elements.forEach(function (element) {
     element.disabled = false;
-  })
-}
+  });
+};
 
 var disableMap = function () {
   var map = document.querySelector('.map');
@@ -168,7 +168,7 @@ var disableMap = function () {
 
   disableElements(inputs);
   disableElements(selects);
-}
+};
 
 var enableMap = function () {
   var map = document.querySelector('.map');
@@ -180,7 +180,7 @@ var enableMap = function () {
 
   enableElements(inputs);
   enableElements(selects);
-}
+};
 
 var disableForm = function () {
   var adForm = document.querySelector('.ad-form');
@@ -193,7 +193,7 @@ var disableForm = function () {
 
   disableElements(inputs);
   disableElements(selects);
-}
+};
 
 var enableForm = function () {
   var adForm = document.querySelector('.ad-form');
@@ -204,7 +204,7 @@ var enableForm = function () {
 
   enableElements(inputs);
   enableElements(selects);
-}
+};
 
 var deactivatePage = function () {
   var mapPinMain = document.querySelector('.map__pin--main');
@@ -214,12 +214,12 @@ var deactivatePage = function () {
   setAddress();
 
   mapPinMain.addEventListener('mousedown', catchLeftMouseButton);
-  mapPinMain.addEventListener('keydown', onMapPinPressEnter );
-}
+  mapPinMain.addEventListener('keydown', onMapPinPressEnter);
+};
 
 var getClearNumber = function (string) {
   return string.replace(/[a-z]/g, '');
-}
+};
 
 var getPinCoordinates = function () {
   var mapPinMain = document.querySelector('.map__pin--main');
@@ -230,22 +230,22 @@ var getPinCoordinates = function () {
   return {
     abscissa: getClearNumber(pinAbscissa) * 1,
     ordinate: getClearNumber(pinOrdinate) * 1
-  }
-}
+  };
+};
 
 var isMapDisabled = function () {
   var map = document.querySelector('.map');
 
   return map.classList.contains('map--faded');
-}
+};
 
 var getCurrentAbscissa = function () {
   return isMapDisabled() ? getPinCoordinates().abscissa + MAIN_PIN_WIDTH / 2 : getPinCoordinates().abscissa + MAIN_PIN_WIDTH / 2;
-}
+};
 
 var getCurrentOrdinate = function () {
   return isMapDisabled() ? getPinCoordinates().ordinate + MAIN_PIN_HEIGHT / 2 : getPinCoordinates().ordinate + MAIN_PIN_HEIGHT + MAIN_PIN_POINTER_HEIGHT;
-}
+};
 
 var setAddress = function () {
   var address = document.querySelector('#address');
@@ -254,19 +254,19 @@ var setAddress = function () {
   var ordinate = getCurrentOrdinate();
 
   address.value = abscissa + ', ' + ordinate;
-}
+};
 
 var getSelectedInput = function (elements) {
   var selectedInput;
 
   elements.forEach(function (element) {
     if (element.selected) {
-      selectedInput = element
+      selectedInput = element;
     }
-  })
+  });
 
   return selectedInput;
-}
+};
 
 var setCurrentElementsDisabled = function (chosenElement, nextElement) {
   if (Number(nextElement.value) > Number(chosenElement.value)) {
@@ -278,22 +278,24 @@ var setCurrentElementsDisabled = function (chosenElement, nextElement) {
   } else {
     nextElement.selected = true;
   }
-}
+};
 
 var updateFormElement = function (nextElements, previousElements) {
   var chosenElement = getSelectedInput(previousElements);
 
   nextElements.forEach(function (element) {
     setCurrentElementsDisabled(chosenElement, element);
-  })
-}
+  });
+};
 
 var setElementsAble = function () {
   var capacity = document.querySelector('#capacity');
   var capacityOptions = capacity.querySelectorAll('option');
 
-  capacityOptions.forEach((element) => element.disabled = false);
-}
+  capacityOptions.forEach(function (element) {
+    element.disabled = false;
+  });
+};
 
 var changeRoomNumber = function () {
   var roomNumber = document.querySelector('#room_number');
@@ -308,8 +310,8 @@ var changeRoomNumber = function () {
   roomNumber.addEventListener('change', function () {
     setElementsAble();
     updateFormElement(capacityOptions, roomOptions);
-  })
-}
+  });
+};
 
 deactivatePage();
 changeRoomNumber();

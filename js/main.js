@@ -276,7 +276,7 @@ var changeCapacityStatus = function () {
   });
 
   capacityOptions.filter(function (element) {
-    return ROOMS_NUMBER_PER_GUESTS[selectedRoomsNumber].indexOf(element.value) === -1;
+    return !ROOMS_NUMBER_PER_GUESTS[selectedRoomsNumber].includes(element.value);
   }).forEach(function (option) {
     option.disabled = true;
   });

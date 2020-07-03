@@ -211,12 +211,10 @@ var enableForm = function () {
 };
 
 var deletePins = function () {
-  var mapPins = document.querySelectorAll('.map__pin');
+  var mapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
 
   mapPins.forEach(function (element) {
-    if (!element.classList.contains('map__pin--main')) {
-      element.remove();
-    }
+    element.remove();
   });
 };
 
@@ -260,7 +258,7 @@ var setDisabledAddress = function () {
   address.value = abscissa + ', ' + ordinate;
 };
 
-var enableNecessaryCapacity = function () {
+var changeCapacityStatus = function () {
   var capacity = document.querySelector('#capacity');
   var capacityOptions = Array.from(capacity.querySelectorAll('option'));
   var roomNumber = document.querySelector('#room_number');
@@ -276,17 +274,12 @@ var enableNecessaryCapacity = function () {
   }).forEach(function (option) {
     option.disabled = false;
   });
-};
 
-var changeCapacityStatus = function () {
-  var capacity = document.querySelector('#capacity');
-  var capacityOptions = capacity.querySelectorAll('option');
-
-  capacityOptions.forEach(function (element) {
-    element.disabled = true;
+  capacityOptions.filter(function (element) {
+    return ROOMS_NUMBER_PER_GUESTS[selectedRoomsNumber].indexOf(element.value) === -1;
+  }).forEach(function (option) {
+    option.disabled = true;
   });
-
-  enableNecessaryCapacity();
 };
 
 var activateAvailableOption = function () {

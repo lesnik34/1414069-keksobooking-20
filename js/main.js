@@ -20,9 +20,18 @@ var ABSCISSA = {
   start: 0,
   end: 1200
 };
+var ROOMS_NUMBER_PER_GUESTS = {
+  1: ['1'],
+  2: ['1', '2'],
+  3: ['1', '2', '3'],
+  100: ['0'],
+};
 
 var PIN_WIDTH_HALF = 25;
 var PIN_HEIGHT = 70;
+var MAIN_PIN_WIDTH = 62;
+var MAIN_PIN_HEIGHT = 62;
+var MAIN_PIN_POINTER_HEIGHT = 22;
 var TITLES = ['Краски Отель', 'Отель Оазис Зип ', 'LUNA Hotel Krasnodar', 'D Hotel', 'Отель Терем', 'Home-otel', 'Отель Коржовъ', 'Hostel on Kostyleva', 'Golden Tulip Krasnodar'];
 var TYPES = ['palace', 'flat', 'house', 'bungalo'];
 var CHECKINS = ['12:00', '13:00', '14:00'];
@@ -93,9 +102,18 @@ var getHotels = function (hotelsCount) {
   return hotels;
 };
 
-var activateMap = function () {
-  var map = document.querySelector('.map');
-  map.classList.remove('.map--faded');
+var activatePage = function () {
+  var mapPinMain = document.querySelector('.map__pin--main');
+
+  enableForm();
+  enableMap();
+  setActiveAddress();
+
+  mapPinMain.removeEventListener('mousedown', onMainPinClick);
+  mapPinMain.removeEventListener('keydown', onMapPinPressEnter);
+
+  var hotels = getHotels(HOTELS_COUNT);
+  renderPins(hotels);
 };
 
 var createPin = function (hotel) {
@@ -120,7 +138,165 @@ var renderPins = function (hotels) {
   mapPins.appendChild(fragment);
 };
 
-activateMap();
-var hotels = getHotels(HOTELS_COUNT);
-renderPins(hotels);
+var onMainPinClick = function (evt) {
+  if (evt.button === 0) {
+    activatePage();
+  }
+};
 
+var onMapPinPressEnter = function (evt) {
+  if (evt.code === 'Enter') {
+    activatePage();
+  }
+};
+
+var disableElements = function (elements) {
+  elements.forEach(function (element) {
+    element.disabled = true;
+  });
+};
+
+var enableElements = function (elements) {
+  elements.forEach(function (element) {
+    element.disabled = false;
+  });
+};
+
+var disableMap = function () {
+  var map = document.querySelector('.map');
+  var mapFilters = document.querySelector('.map__filters');
+  var inputs = mapFilters.querySelectorAll('input');
+  var selects = mapFilters.querySelectorAll('select');
+
+  map.classList.add('map--faded');
+
+  disableElements(inputs);
+  disableElements(selects);
+};
+
+var enableMap = function () {
+  var map = document.querySelector('.map');
+  var mapFilters = document.querySelector('.map__filters');
+  var inputs = mapFilters.querySelectorAll('input');
+  var selects = mapFilters.querySelectorAll('select');
+
+  map.classList.remove('map--faded');
+
+  enableElements(inputs);
+  enableElements(selects);
+};
+
+var disableForm = function () {
+  var adForm = document.querySelector('.ad-form');
+  var inputs = adForm.querySelectorAll('input');
+  var selects = adForm.querySelectorAll('select');
+
+  if (!adForm.classList.contains('ad-form--disabled')) {
+    adForm.classList.add('ad-form--disabled');
+  }
+
+  disableElements(inputs);
+  disableElements(selects);
+};
+
+var enableForm = function () {
+  var adForm = document.querySelector('.ad-form');
+  var inputs = adForm.querySelectorAll('input');
+  var selects = adForm.querySelectorAll('select');
+
+  adForm.classList.remove('ad-form--disabled');
+
+  enableElements(inputs);
+  enableElements(selects);
+};
+
+var deletePins = function () {
+  var mapPins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
+
+  mapPins.forEach(function (element) {
+    element.remove();
+  });
+};
+
+var deactivatePage = function () {
+  var mapPinMain = document.querySelector('.map__pin--main');
+
+  deletePins();
+  disableForm();
+  disableMap();
+  setDisabledAddress();
+  changeCapacityStatus();
+  activateAvailableOption();
+
+  mapPinMain.addEventListener('mousedown', onMainPinClick);
+  mapPinMain.addEventListener('keydown', onMapPinPressEnter);
+};
+
+var setActiveAddress = function () {
+  var address = document.querySelector('#address');
+  var mapPinMain = document.querySelector('.map__pin--main');
+
+  var pinAbscissa = parseInt(mapPinMain.style.left, 10);
+  var pinOrdinate = parseInt(mapPinMain.style.top, 10);
+
+  var abscissa = pinAbscissa + MAIN_PIN_WIDTH / 2;
+  var ordinate = pinOrdinate + MAIN_PIN_HEIGHT + MAIN_PIN_POINTER_HEIGHT;
+
+  address.value = abscissa + ', ' + ordinate;
+};
+
+var setDisabledAddress = function () {
+  var address = document.querySelector('#address');
+  var mapPinMain = document.querySelector('.map__pin--main');
+
+  var pinAbscissa = parseInt(mapPinMain.style.left, 10);
+  var pinOrdinate = parseInt(mapPinMain.style.top, 10);
+
+  var abscissa = pinAbscissa + MAIN_PIN_WIDTH / 2;
+  var ordinate = pinOrdinate + MAIN_PIN_HEIGHT / 2;
+
+  address.value = abscissa + ', ' + ordinate;
+};
+
+var changeCapacityStatus = function () {
+  var capacity = document.querySelector('#capacity');
+  var capacityOptions = Array.from(capacity.querySelectorAll('option'));
+  var roomNumber = document.querySelector('#room_number');
+
+  var selectedElementIndex = roomNumber.selectedIndex;
+  var options = roomNumber.options;
+  var selectedOption = options[selectedElementIndex];
+  var selectedRoomsNumber = selectedOption.value;
+
+
+  capacityOptions.filter(function (element) {
+    return ROOMS_NUMBER_PER_GUESTS[selectedRoomsNumber].includes(element.value);
+  }).forEach(function (option) {
+    option.disabled = false;
+  });
+
+  capacityOptions.filter(function (element) {
+    return !ROOMS_NUMBER_PER_GUESTS[selectedRoomsNumber].includes(element.value);
+  }).forEach(function (option) {
+    option.disabled = true;
+  });
+};
+
+var activateAvailableOption = function () {
+  var capacity = document.querySelector('#capacity');
+  var firstAvailableOption = capacity.querySelector('option:not(:disabled)');
+
+  firstAvailableOption.selected = true;
+};
+
+var chainRoomNumberAmountGuests = function () {
+  var roomNumber = document.querySelector('#room_number');
+
+  roomNumber.addEventListener('change', function () {
+    changeCapacityStatus();
+    activateAvailableOption();
+  });
+};
+
+deactivatePage();
+chainRoomNumberAmountGuests();

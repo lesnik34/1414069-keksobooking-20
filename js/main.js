@@ -29,7 +29,7 @@
     }
   };
 
-  main.deactivatePage();
+  window.main.deactivatePage();
   window.dialog.chainRoomNumberAmountGuests();
 })();
 

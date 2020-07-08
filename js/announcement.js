@@ -2,7 +2,7 @@
 
 (function () {
 
-  window.form = {
+  window.announcement = {
     enableForm: function () {
       var adForm = document.querySelector('.ad-form');
       var inputs = adForm.querySelectorAll('input');

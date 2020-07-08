@@ -2,7 +2,7 @@
 
 (function () {
 
-  window.map = {
+  window.interactivity = {
     enableMap: function () {
       var map = document.querySelector('.map');
       var mapFilters = document.querySelector('.map__filters');

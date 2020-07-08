@@ -2,7 +2,7 @@
 
 (function () {
 
-  window.pin = {
+  window.interactivityActions = {
     createPin: function (hotel) {
       var templatePin = document.querySelector('#pin').content.querySelector('.map__pin');
       var pinClone = templatePin.cloneNode(true);

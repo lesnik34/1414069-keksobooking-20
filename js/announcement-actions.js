@@ -2,7 +2,7 @@
 
 (function () {
 
-  window.formActions = {
+  window.announcementActions = {
     setActiveAddress: function () {
       var address = document.querySelector('#address');
       var mapPinMain = document.querySelector('.map__pin--main');

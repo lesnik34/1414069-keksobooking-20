@@ -5,24 +5,24 @@
     activatePage: function () {
       var mapPinMain = document.querySelector('.map__pin--main');
 
-      window.form.enableForm();
-      window.map.enableMap();
-      window.formActions.setActiveAddress();
+      window.announcement.enableForm();
+      window.interactivity.enableMap();
+      window.announcementActions.setActiveAddress();
 
       mapPinMain.removeEventListener('mousedown', window.dialog.onMainPinClick);
       mapPinMain.removeEventListener('keydown', window.dialog.onMapPinPressEnter);
 
       var hotels = window.data.getHotels(window.options.HOTELS_COUNT);
-      window.rendering.renderPins(hotels);
+      window.generation.renderPins(hotels);
     },
     deactivatePage: function () {
       var mapPinMain = document.querySelector('.map__pin--main');
-      window.pin.deletePins();
-      window.form.disableForm();
-      window.map.disableMap();
-      window.formActions.setDisabledAddress();
-      window.formActions.changeCapacityStatus();
-      window.formActions.activateAvailableOption();
+      window.interactivityActions.deletePins();
+      window.announcement.disableForm();
+      window.interactivity.disableMap();
+      window.announcementActions.setDisabledAddress();
+      window.announcementActions.changeCapacityStatus();
+      window.announcementActions.activateAvailableOption();
 
       mapPinMain.addEventListener('mousedown', window.dialog.onMainPinClick);
       mapPinMain.addEventListener('keydown', window.dialog.onMapPinPressEnter);

@@ -12,8 +12,7 @@
       mapPinMain.removeEventListener('mousedown', window.dialog.onMainPinClick);
       mapPinMain.removeEventListener('keydown', window.dialog.onMapPinPressEnter);
 
-      var hotels = window.data.getHotels(window.options.HOTELS_COUNT);
-      window.generation.renderPins(hotels);
+      window.backend.load(window.data.loadHandler, window.data.errorHandler);
     },
     deactivatePage: function () {
       var mapPinMain = document.querySelector('.map__pin--main');

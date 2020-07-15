@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  
+
   var ROOMS_RANGE = {
     min: 1,
     max: 1

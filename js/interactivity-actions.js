@@ -31,7 +31,7 @@
       })) {
         element.remove();
       }
-    })
+    });
   };
 
   window.interactivityActions = {

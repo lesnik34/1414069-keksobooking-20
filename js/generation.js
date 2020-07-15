@@ -11,6 +11,12 @@
         fragment.appendChild(pin);
       });
       mapPins.appendChild(fragment);
+    },
+    renderCard: function (card) {
+      var mapPins = document.querySelector('.map__pins');
+      var fragment = document.createDocumentFragment();
+      fragment.appendChild(window.interactivityActions.createCard(card));
+      mapPins.appendChild(fragment);
     }
   };
 

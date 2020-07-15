@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   var ROOMS_RANGE = {
     min: 1,
     max: 1
@@ -27,20 +28,25 @@
     3: ['1', '2', '3'],
     100: ['0'],
   };
+  var HOUSE_TYPE = {
+    'flat': 'Квартира',
+    'bungalo': 'Бунгало',
+    'house': 'Дом',
+    'palace': 'Дворец'
+  };
+  var STATUS_CODE = {
+    OK: 200
+  };
 
   var PIN_WIDTH_HALF = 25;
   var PIN_HEIGHT = 70;
   var MAIN_PIN_WIDTH = 62;
   var MAIN_PIN_HEIGHT = 62;
   var MAIN_PIN_POINTER_HEIGHT = 22;
-  var TITLES = ['Краски Отель', 'Отель Оазис Зип ', 'LUNA Hotel Krasnodar', 'D Hotel', 'Отель Терем', 'Home-otel', 'Отель Коржовъ', 'Hostel on Kostyleva', 'Golden Tulip Krasnodar'];
-  var TYPES = ['palace', 'flat', 'house', 'bungalo'];
-  var CHECKINS = ['12:00', '13:00', '14:00'];
-  var CHECKOUTS = ['12:00', '13:00', '14:00'];
-  var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-  var DESCRIPTION = 'Описание';
-  var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
   var HOTELS_COUNT = 8;
+  var TIMEOUT_IN_MS = 10000;
+  var LOAD_URL = 'https://javascript.pages.academy/keksobooking/data';
+  var UPLOAD_URL = '';
 
   window.options = {
     ROOMS_RANGE: ROOMS_RANGE,
@@ -49,19 +55,17 @@
     ORDINATE: ORDINATE,
     ABSCISSA: ABSCISSA,
     ROOMS_NUMBER_PER_GUESTS: ROOMS_NUMBER_PER_GUESTS,
+    HOUSE_TYPE: HOUSE_TYPE,
     PIN_WIDTH_HALF: PIN_WIDTH_HALF,
     PIN_HEIGHT: PIN_HEIGHT,
     MAIN_PIN_WIDTH: MAIN_PIN_WIDTH,
     MAIN_PIN_HEIGHT: MAIN_PIN_HEIGHT,
     MAIN_PIN_POINTER_HEIGHT: MAIN_PIN_POINTER_HEIGHT,
-    TITLES: TITLES,
-    TYPES: TYPES,
-    CHECKINS: CHECKINS,
-    CHECKOUTS: CHECKOUTS,
-    FEATURES: FEATURES,
-    DESCRIPTION: DESCRIPTION,
-    PHOTOS: PHOTOS,
-    HOTELS_COUNT: HOTELS_COUNT
+    HOTELS_COUNT: HOTELS_COUNT,
+    TIMEOUT_IN_MS: TIMEOUT_IN_MS,
+    LOAD_URL: LOAD_URL,
+    UPLOAD_URL: UPLOAD_URL,
+    STATUS_CODE: STATUS_CODE
   };
 
 })();

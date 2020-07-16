@@ -22,17 +22,17 @@
     start: 0,
     end: 1200
   };
-  var ROOMS_NUMBER_PER_GUESTS = {
-    1: ['1'],
-    2: ['1', '2'],
-    3: ['1', '2', '3'],
-    100: ['0'],
-  };
   var HOUSE_TYPE = {
     'flat': 'Квартира',
     'bungalo': 'Бунгало',
     'house': 'Дом',
     'palace': 'Дворец'
+  };
+  var ROOMS_NUMBER_PER_GUESTS = {
+    1: ['1'],
+    2: ['1', '2'],
+    3: ['1', '2', '3'],
+    100: ['0'],
   };
   var STATUS_CODE = {
     OK: 200

@@ -5,7 +5,7 @@
   window.data = {
     loadHandler: function (loadData) {
       window.generation.renderPins(loadData);
-      window.generation.renderCard(loadData[2]);
+      window.generation.renderCard(loadData[0]);
     },
     errorHandler: function (errorMessage) {
       var node = document.createElement('div');

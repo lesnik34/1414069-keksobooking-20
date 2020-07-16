@@ -28,6 +28,12 @@
     3: ['1', '2', '3'],
     100: ['0'],
   };
+  var HOUSE_TYPE = {
+    'flat': 'Квартира',
+    'bungalo': 'Бунгало',
+    'house': 'Дом',
+    'palace': 'Дворец'
+  };
   var STATUS_CODE = {
     OK: 200
   };

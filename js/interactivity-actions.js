@@ -1,37 +1,30 @@
 'use strict';
 
 (function () {
-  var createIMG = function (numberOfObjects, cardClone) {
+  var addPhotos = function (photos, cardClone) {
     var popupPhotos = cardClone.querySelector('.popup__photos');
 
-    for (var i = 0; i < numberOfObjects - 1; i++) {
+    photos.forEach(function (photo) {
       var cloneIMG = cardClone.querySelector('.popup__photo').cloneNode();
+      cloneIMG.src = photo;
       popupPhotos.appendChild(cloneIMG);
-    }
-  };
-
-  var addPhotos = function (photos, cardClone) {
-    var numberOfObjects = photos.length;
-
-    createIMG(numberOfObjects, cardClone);
-    var popupPhotos = cardClone.querySelectorAll('.popup__photo');
-    popupPhotos.forEach(function (photo, index) {
-      photo.src = photos[index];
     });
+
+    popupPhotos.querySelector('.popup__photo').remove();
   };
 
   var deleteUnnecessaryFeatures = function (cardClone, features) {
-    var popupFeatures = cardClone.querySelectorAll('.popup__feature');
+    var popupFeatures = cardClone.querySelector('.popup__features');
+    var classPrefix = 'popup__feature--';
+    var classFeature = 'popup__feature';
 
-    popupFeatures.forEach(function (element) {
-      var necessaryFeatureName = element.classList[1].replace('popup__feature--', '');
+    popupFeatures.innerHTML = '';
 
-      if (!features.find(function (feature) {
-        return feature === necessaryFeatureName;
-      })) {
-        element.remove();
-      }
-    });
+    features.forEach(function (feature) {
+      var listElement = document.createElement('li');
+      listElement.classList.add(classFeature, classPrefix + feature);
+      popupFeatures.appendChild(listElement);
+    })
   };
 
   window.interactivityActions = {

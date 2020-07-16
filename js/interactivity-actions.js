@@ -24,7 +24,7 @@
       var listElement = document.createElement('li');
       listElement.classList.add(classFeature, classPrefix + feature);
       popupFeatures.appendChild(listElement);
-    })
+    });
   };
 
   window.interactivityActions = {

@@ -34,6 +34,12 @@
     3: ['1', '2', '3'],
     100: ['0'],
   };
+  var PRICE_PER_TYPE = {
+    'bungalo': 0,
+    'flat': 1000,
+    'house': 5000,
+    'palace': 10000
+  };
   var STATUS_CODE = {
     OK: 200
   };
@@ -47,6 +53,8 @@
   var TIMEOUT_IN_MS = 10000;
   var LOAD_URL = 'https://javascript.pages.academy/keksobooking/data';
   var UPLOAD_URL = '';
+
+  var loadData = [];
 
   window.options = {
     ROOMS_RANGE: ROOMS_RANGE,
@@ -65,7 +73,9 @@
     TIMEOUT_IN_MS: TIMEOUT_IN_MS,
     LOAD_URL: LOAD_URL,
     UPLOAD_URL: UPLOAD_URL,
-    STATUS_CODE: STATUS_CODE
+    STATUS_CODE: STATUS_CODE,
+    PRICE_PER_TYPE: PRICE_PER_TYPE,
+    loadData: loadData
   };
 
 })();

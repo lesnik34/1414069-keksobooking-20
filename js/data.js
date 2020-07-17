@@ -4,8 +4,10 @@
 
   window.data = {
     loadHandler: function (loadData) {
-      window.generation.renderPins(loadData);
-      window.generation.renderCard(loadData[0]);
+      var changedData = window.util.addDataId(loadData);
+
+      window.generation.renderPins(changedData);
+      window.options.loadData = changedData;
     },
     errorHandler: function (errorMessage) {
       var node = document.createElement('div');

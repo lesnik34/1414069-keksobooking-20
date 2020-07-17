@@ -1,30 +1,12 @@
 'use strict';
 
 (function () {
-  var addPhotos = function (photos, cardClone) {
-    var popupPhotos = cardClone.querySelector('.popup__photos');
+  var addCardActions = function () {
+    var map = document.querySelector('.map');
+    var popupClose = document.querySelector('.popup__close');
 
-    photos.forEach(function (photo) {
-      var cloneIMG = cardClone.querySelector('.popup__photo').cloneNode();
-      cloneIMG.src = photo;
-      popupPhotos.appendChild(cloneIMG);
-    });
-
-    popupPhotos.querySelector('.popup__photo').remove();
-  };
-
-  var deleteUnnecessaryFeatures = function (cardClone, features) {
-    var popupFeatures = cardClone.querySelector('.popup__features');
-    var classPrefix = 'popup__feature--';
-    var classFeature = 'popup__feature';
-
-    popupFeatures.innerHTML = '';
-
-    features.forEach(function (feature) {
-      var listElement = document.createElement('li');
-      listElement.classList.add(classFeature, classPrefix + feature);
-      popupFeatures.appendChild(listElement);
-    });
+    popupClose.addEventListener('click', window.dialog.onCardCloseClick);
+    window.addEventListener('keydown', window.dialog.onCardPressEsc);
   };
 
   window.interactivityActions = {
@@ -36,6 +18,7 @@
       pinClone.style.left = hotel.location.x - window.options.PIN_WIDTH_HALF + 'px';
       pinImg.src = hotel.author.avatar;
       pinImg.alt = hotel.offer.title;
+      pinImg.dataset.pinIndex = hotel.dataId;
 
       return pinClone;
     },
@@ -67,10 +50,22 @@
       popupTextCapacity.textContent = card.offer.rooms + ' комнаты для ' + card.offer.guests;
       popupTextTime.textContent = 'Заезд после ' + card.offer.checkin + ', выезд до ' + card.offer.checkout;
       popupDescription.textContent = card.offer.description;
-      addPhotos(card.offer.photos, cardClone);
-      deleteUnnecessaryFeatures(cardClone, card.offer.features);
+      window.generation.addPhotos(card.offer.photos, cardClone);
+      window.generation.renderFeatures(cardClone, card.offer.features);
 
       return cardClone;
+    },
+    cardActivation: function (currentPin) {
+      var mapCard = document.querySelector('.map__card');
+
+      var currentData = window.options.loadData[currentPin.dataset.pinIndex];
+
+      if (mapCard) {
+        mapCard.remove();
+      }
+
+      window.generation.renderCard(currentData);
+      addCardActions();
     }
   };
 

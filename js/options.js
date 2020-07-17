@@ -22,11 +22,23 @@
     start: 0,
     end: 1200
   };
+  var HOUSE_TYPE = {
+    'flat': 'Квартира',
+    'bungalo': 'Бунгало',
+    'house': 'Дом',
+    'palace': 'Дворец'
+  };
   var ROOMS_NUMBER_PER_GUESTS = {
     1: ['1'],
     2: ['1', '2'],
     3: ['1', '2', '3'],
     100: ['0'],
+  };
+  var PRICE_PER_TYPE = {
+    'bungalo': 0,
+    'flat': 1000,
+    'house': 5000,
+    'palace': 10000
   };
   var STATUS_CODE = {
     OK: 200
@@ -42,6 +54,8 @@
   var LOAD_URL = 'https://javascript.pages.academy/keksobooking/data';
   var UPLOAD_URL = '';
 
+  var loadData = [];
+
   window.options = {
     ROOMS_RANGE: ROOMS_RANGE,
     GUESTS_RANGE: GUESTS_RANGE,
@@ -49,6 +63,7 @@
     ORDINATE: ORDINATE,
     ABSCISSA: ABSCISSA,
     ROOMS_NUMBER_PER_GUESTS: ROOMS_NUMBER_PER_GUESTS,
+    HOUSE_TYPE: HOUSE_TYPE,
     PIN_WIDTH_HALF: PIN_WIDTH_HALF,
     PIN_HEIGHT: PIN_HEIGHT,
     MAIN_PIN_WIDTH: MAIN_PIN_WIDTH,
@@ -58,7 +73,9 @@
     TIMEOUT_IN_MS: TIMEOUT_IN_MS,
     LOAD_URL: LOAD_URL,
     UPLOAD_URL: UPLOAD_URL,
-    STATUS_CODE: STATUS_CODE
+    STATUS_CODE: STATUS_CODE,
+    PRICE_PER_TYPE: PRICE_PER_TYPE,
+    loadData: loadData
   };
 
 })();

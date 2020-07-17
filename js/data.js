@@ -4,7 +4,10 @@
 
   window.data = {
     loadHandler: function (loadData) {
-      window.generation.renderPins(loadData);
+      var changedData = window.util.addDataId(loadData);
+
+      window.generation.renderPins(changedData);
+      window.options.loadData = changedData;
     },
     errorHandler: function (errorMessage) {
       var node = document.createElement('div');
@@ -13,7 +16,6 @@
       node.style.left = 0;
       node.style.right = 0;
       node.style.fontSize = '30px';
-
       node.textContent = errorMessage;
       document.body.insertAdjacentElement('afterbegin', node);
     }

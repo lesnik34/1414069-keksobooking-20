@@ -16,7 +16,7 @@
     addDataId: function (data) {
       data.forEach(function (element, index) {
         element.dataId = index;
-      })
+      });
       return data;
     },
     closeCard: function () {

@@ -2,7 +2,6 @@
 
 (function () {
   var addCardActions = function () {
-    var map = document.querySelector('.map');
     var popupClose = document.querySelector('.popup__close');
 
     popupClose.addEventListener('click', window.dialog.onCardCloseClick);

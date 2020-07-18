@@ -40,8 +40,8 @@
       var roomNumber = document.querySelector('#room_number');
 
       roomNumber.addEventListener('change', function () {
-        window.formActions.changeCapacityStatus();
-        window.formActions.activateAvailableOption();
+        window.announcementActions.changeCapacityStatus();
+        window.announcementActions.activateAvailableOption();
       });
     },
     onchangeHouseType: function () {

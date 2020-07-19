@@ -38,7 +38,7 @@
       window.announcementActions.changeCapacityStatus();
       window.announcementActions.activateAvailableOption();
 
-      mapPinMain.addEventListener('mousedown', window.dialog.onMainPinClick);
+      mapPinMain.addEventListener('mousedown', window.onMouseDown);
       mapPinMain.addEventListener('keydown', window.dialog.onMapPinPressEnter);
 
       mapPins.removeEventListener('click', window.dialog.onPinClick);

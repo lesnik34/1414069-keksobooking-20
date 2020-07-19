@@ -17,7 +17,6 @@
       mapPinMain.removeEventListener('keydown', window.dialog.onMapPinPressEnter);
 
       mapPins.addEventListener('click', window.dialog.onPinClick);
-      mapPins.addEventListener('keydown', window.dialog.onPinPressEnter);
       houseType.addEventListener('change', window.dialog.onchangeHouseType);
       timeIn.addEventListener('change', window.dialog.onchangeTimeIn);
       timeOut.addEventListener('change', window.dialog.onchangeTimeOut);
@@ -43,7 +42,6 @@
       mapPinMain.addEventListener('keydown', window.dialog.onMapPinPressEnter);
 
       mapPins.removeEventListener('click', window.dialog.onPinClick);
-      mapPins.removeEventListener('keydown', window.dialog.onPinPressEnter);
       houseType.removeEventListener('change', window.dialog.onchangeHouseType);
       window.removeEventListener('keydown', window.dialog.onCardPressEsc);
       timeIn.removeEventListener('change', window.dialog.onchangeTimeIn);

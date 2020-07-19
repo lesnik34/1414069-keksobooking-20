@@ -54,10 +54,10 @@
 
       return cardClone;
     },
-    cardActivation: function (currentPin) {
+    activateCard: function (currentPin) {
       var mapCard = document.querySelector('.map__card');
 
-      var currentData = window.options.loadData[currentPin.dataset.pinIndex];
+      var currentData = window.options.loadData[currentPin.querySelector('img').dataset.pinIndex];
 
       if (mapCard) {
         mapCard.remove();

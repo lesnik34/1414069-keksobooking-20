@@ -13,19 +13,14 @@
       }
     },
     onPinClick: function (evt) {
-      var currentPin = evt.target;
+      if (evt.target.tagName === 'BUTTON' && evt.target.querySelector('img').dataset.pinIndex) {
+        currentPin = evt.target;
 
-      if (currentPin.dataset.pinIndex) {
-        window.interactivityActions.cardActivation(currentPin);
-      }
-    },
-    onPinPressEnter: function (evt) {
-      if (evt.code === 'Enter') {
-        var currentPin = evt.target.querySelector('img');
+        window.interactivityActions.activateCard(currentPin);
+      } else if (evt.target.parentNode.tagName === 'BUTTON' && evt.target.dataset.pinIndex) {
+        var currentPin = evt.target.parentNode;
 
-        if (currentPin.dataset.pinIndex) {
-          window.interactivityActions.cardActivation(currentPin);
-        }
+        window.interactivityActions.activateCard(currentPin);
       }
     },
     onCardCloseClick: function () {
@@ -40,8 +35,8 @@
       var roomNumber = document.querySelector('#room_number');
 
       roomNumber.addEventListener('change', function () {
-        window.formActions.changeCapacityStatus();
-        window.formActions.activateAvailableOption();
+        window.announcementActions.changeCapacityStatus();
+        window.announcementActions.activateAvailableOption();
       });
     },
     onchangeHouseType: function () {

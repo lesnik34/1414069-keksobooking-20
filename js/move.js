@@ -29,8 +29,8 @@
       dragged = shift.x !== 0 || shift.y !== 0;
 
       var topCoordinates = mapPinMain.offsetTop - shift.y;
-      var topMaxRange = window.options.ORDINATE.end;
-      var bottomMinRange = window.options.ORDINATE.start;
+      var topMaxRange = window.options.ORDINATE.end - window.options.MAIN_PIN_HEIGHT - window.options.MAIN_PIN_POINTER_HEIGHT;
+      var bottomMinRange = window.options.ORDINATE.start - window.options.MAIN_PIN_HEIGHT - window.options.MAIN_PIN_POINTER_HEIGHT;
 
       var leftCoordinates = mapPinMain.offsetLeft - shift.x;
       var leftMinRange = window.options.ABSCISSA.start - window.options.MAIN_PIN_WIDTH / 2;

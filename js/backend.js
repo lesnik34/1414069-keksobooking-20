@@ -30,6 +30,14 @@
 
       xhr.open('GET', window.options.LOAD_URL);
       xhr.send();
+    },
+    save: function (data, onLoad, onError) {
+      var xhr = new XMLHttpRequest();
+
+      setXHRListeners(xhr, onLoad, onError);
+
+      xhr.open('POST', window.options.UPLOAD_URL);
+      xhr.send(data);
     }
   };
 })();

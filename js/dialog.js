@@ -61,7 +61,44 @@
       var timeInCurrentOption = timeIn.querySelector('option[value="' + timeValue + '"]');
 
       timeInCurrentOption.selected = true;
-    }
+    },
+    onPublishClick: function (evt) {
+      var adForm = document.querySelector('.ad-form');
+
+      evt.preventDefault();
+      window.backend.save(new FormData(adForm), window.data.uploadHandler, window.data.uploadErrorHandler);
+    },
+    onErrorPressEsc: function (evt) {
+      var errorMessage = document.querySelector('.error');
+
+      if (evt.code === 'Escape') {
+        errorMessage.remove();
+      }
+    },
+    onErrorClick: function (evt) {
+      var errorMessage = document.querySelector('.error');
+
+      if (evt.target === evt.currentTarget) {
+        errorMessage.remove();
+      }
+    },
+    onResetClick: function () {
+      window.announcementActions.resetAd();
+    },
+    onSuccessPressEsc: function (evt) {
+      var successMessage = document.querySelector('.success');
+
+      if (evt.code === 'Escape') {
+        successMessage.remove();
+      }
+    },
+    onSuccessClick: function (evt) {
+      var successMessage = document.querySelector('.success');
+
+      if (evt.target === evt.currentTarget) {
+        successMessage.remove();
+      }
+    },
   };
 
 })();

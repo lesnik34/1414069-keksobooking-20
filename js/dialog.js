@@ -1,6 +1,22 @@
 'use strict';
 
 (function () {
+  var removeSuccessHandlers = function () {
+    var successMessage = document.querySelector('.success');
+
+    successMessage.removeEventListener('click', window.dialog.onSuccessClick);
+    window.removeEventListener('keydown', window.dialog.onSuccessPressEsc);
+  };
+
+  var removeErrorHandlers = function () {
+    var errorButton = document.querySelector('.error__button');
+    var errorMessage = document.querySelector('.error');
+
+    errorMessage.removeEventListener('click', window.dialog.onErrorClick);
+    errorButton.removeEventListener('click', window.dialog.onErrorClick);
+    window.removeEventListener('keydown', window.dialog.onErrorPressEsc);
+  };
+
   window.dialog = {
     onMainPinClick: function (evt) {
       if (evt.button === 0) {
@@ -70,6 +86,7 @@
     },
     onErrorPressEsc: function (evt) {
       var errorMessage = document.querySelector('.error');
+      removeErrorHandlers();
 
       if (evt.code === 'Escape') {
         errorMessage.remove();
@@ -77,6 +94,7 @@
     },
     onErrorClick: function (evt) {
       var errorMessage = document.querySelector('.error');
+      removeErrorHandlers();
 
       if (evt.target === evt.currentTarget) {
         errorMessage.remove();
@@ -87,6 +105,7 @@
     },
     onSuccessPressEsc: function (evt) {
       var successMessage = document.querySelector('.success');
+      removeSuccessHandlers();
 
       if (evt.code === 'Escape') {
         successMessage.remove();
@@ -94,6 +113,7 @@
     },
     onSuccessClick: function (evt) {
       var successMessage = document.querySelector('.success');
+      removeSuccessHandlers();
 
       if (evt.target === evt.currentTarget) {
         successMessage.remove();

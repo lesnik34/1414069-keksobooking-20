@@ -20,12 +20,12 @@
       mapPinMain.removeEventListener('keydown', window.dialog.onMapPinPressEnter);
 
       mapPins.addEventListener('click', window.dialog.onPinClick);
-      houseType.addEventListener('change', window.dialog.onchangeHouseType);
-      timeIn.addEventListener('change', window.dialog.onchangeTimeIn);
-      timeOut.addEventListener('change', window.dialog.onchangeTimeOut);
+      houseType.addEventListener('change', window.dialog.onHouseTypeChange);
+      timeIn.addEventListener('change', window.dialog.onTimeInChange);
+      timeOut.addEventListener('change', window.dialog.onTimeOutChange);
       adFormSubmit.addEventListener('click', window.dialog.onPublishClick);
       adFormReset.addEventListener('click', window.dialog.onResetClick);
-      mapFilters.addEventListener('change', window.dialog.onchangeFilters);
+      mapFilters.addEventListener('change', window.dialog.onFiltersChange);
 
       window.backend.load(window.data.loadHandler, window.data.errorHandler);
     },
@@ -50,13 +50,13 @@
       mapPinMain.addEventListener('keydown', window.dialog.onMapPinPressEnter);
 
       mapPins.removeEventListener('click', window.dialog.onPinClick);
-      houseType.removeEventListener('change', window.dialog.onchangeHouseType);
+      houseType.removeEventListener('change', window.dialog.onHouseTypeChange);
       window.removeEventListener('keydown', window.dialog.onCardPressEsc);
-      timeIn.removeEventListener('change', window.dialog.onchangeTimeIn);
-      timeOut.removeEventListener('change', window.dialog.onchangeTimeOut);
+      timeIn.removeEventListener('change', window.dialog.onTimeInChange);
+      timeOut.removeEventListener('change', window.dialog.onTimeOutChange);
       adFormSubmit.removeEventListener('click', window.dialog.onPublishClick);
       adFormReset.removeEventListener('click', window.dialog.onResetClick);
-      mapFilters.removeEventListener('onchange', window.dialog.onchangeFilters);
+      mapFilters.removeEventListener('onchange', window.dialog.onFiltersChange);
     }
   };
 

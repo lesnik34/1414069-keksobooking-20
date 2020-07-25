@@ -22,6 +22,10 @@
     start: 0,
     end: 1200
   };
+  var DEFAULT_PIN_LOCATION = {
+    left: 570,
+    top: 375
+  };
   var HOUSE_TYPE = {
     'flat': 'Квартира',
     'bungalo': 'Бунгало',
@@ -52,7 +56,7 @@
   var HOTELS_COUNT = 8;
   var TIMEOUT_IN_MS = 10000;
   var LOAD_URL = 'https://javascript.pages.academy/keksobooking/data';
-  var UPLOAD_URL = '';
+  var UPLOAD_URL = 'https://javascript.pages.academy/keksobooking';
 
   var loadData = [];
 
@@ -62,6 +66,7 @@
     PRICES_RANGE: PRICES_RANGE,
     ORDINATE: ORDINATE,
     ABSCISSA: ABSCISSA,
+    DEFAULT_PIN_LOCATION: DEFAULT_PIN_LOCATION,
     ROOMS_NUMBER_PER_GUESTS: ROOMS_NUMBER_PER_GUESTS,
     HOUSE_TYPE: HOUSE_TYPE,
     PIN_WIDTH_HALF: PIN_WIDTH_HALF,

@@ -54,6 +54,15 @@
       var firstAvailableOption = capacity.querySelector('option:not(:disabled)');
 
       firstAvailableOption.selected = true;
+    },
+    resetAd: function () {
+      var adForm = document.querySelector('.ad-form');
+      var mapPinMain = document.querySelector('.map__pin--main');
+
+      adForm.reset();
+      mapPinMain.style.left = window.options.DEFAULT_PIN_LOCATION.left + 'px';
+      mapPinMain.style.top = window.options.DEFAULT_PIN_LOCATION.top + 'px';
+      window.announcementActions.setActiveAddress();
     }
   };
 })();

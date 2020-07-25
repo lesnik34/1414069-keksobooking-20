@@ -1,6 +1,22 @@
 'use strict';
 
 (function () {
+  var removeSuccessHandlers = function () {
+    var successMessage = document.querySelector('.success');
+
+    successMessage.removeEventListener('click', window.dialog.onSuccessClick);
+    window.removeEventListener('keydown', window.dialog.onSuccessPressEsc);
+  };
+
+  var removeErrorHandlers = function () {
+    var errorButton = document.querySelector('.error__button');
+    var errorMessage = document.querySelector('.error');
+
+    errorMessage.removeEventListener('click', window.dialog.onErrorClick);
+    errorButton.removeEventListener('click', window.dialog.onErrorClick);
+    window.removeEventListener('keydown', window.dialog.onErrorPressEsc);
+  };
+
   window.dialog = {
     onMainPinClick: function (evt) {
       if (evt.button === 0) {
@@ -61,7 +77,48 @@
       var timeInCurrentOption = timeIn.querySelector('option[value="' + timeValue + '"]');
 
       timeInCurrentOption.selected = true;
-    }
+    },
+    onPublishClick: function (evt) {
+      var adForm = document.querySelector('.ad-form');
+
+      evt.preventDefault();
+      window.backend.save(new FormData(adForm), window.data.uploadHandler, window.data.uploadErrorHandler);
+    },
+    onErrorPressEsc: function (evt) {
+      var errorMessage = document.querySelector('.error');
+
+      if (evt.code === 'Escape') {
+        removeErrorHandlers();
+        errorMessage.remove();
+      }
+    },
+    onErrorClick: function (evt) {
+      var errorMessage = document.querySelector('.error');
+
+      if (evt.target === evt.currentTarget) {
+        removeErrorHandlers();
+        errorMessage.remove();
+      }
+    },
+    onResetClick: function () {
+      window.announcementActions.resetAd();
+    },
+    onSuccessPressEsc: function (evt) {
+      var successMessage = document.querySelector('.success');
+
+      if (evt.code === 'Escape') {
+        removeSuccessHandlers();
+        successMessage.remove();
+      }
+    },
+    onSuccessClick: function (evt) {
+      var successMessage = document.querySelector('.success');
+
+      if (evt.target === evt.currentTarget) {
+        removeSuccessHandlers();
+        successMessage.remove();
+      }
+    },
   };
 
 })();

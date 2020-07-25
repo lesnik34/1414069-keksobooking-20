@@ -65,6 +65,20 @@
 
       window.generation.renderCard(currentData);
       addCardActions();
+    },
+    activateSuccessMassage: function () {
+      var successMassage = document.querySelector('#success').content.querySelector('.success');
+      var main = document.querySelector('main');
+      var massageClone = successMassage.cloneNode(true);
+
+      main.appendChild(massageClone);
+    },
+    activateErrorMassage: function () {
+      var errorMassage = document.querySelector('#error').content.querySelector('.error');
+      var main = document.querySelector('main');
+      var massageClone = errorMassage.cloneNode(true);
+
+      main.appendChild(massageClone);
     }
   };
 

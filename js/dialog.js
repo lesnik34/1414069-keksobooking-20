@@ -86,17 +86,17 @@
     },
     onErrorPressEsc: function (evt) {
       var errorMessage = document.querySelector('.error');
-      removeErrorHandlers();
 
       if (evt.code === 'Escape') {
+        removeErrorHandlers();
         errorMessage.remove();
       }
     },
     onErrorClick: function (evt) {
       var errorMessage = document.querySelector('.error');
-      removeErrorHandlers();
 
       if (evt.target === evt.currentTarget) {
+        removeErrorHandlers();
         errorMessage.remove();
       }
     },
@@ -105,17 +105,17 @@
     },
     onSuccessPressEsc: function (evt) {
       var successMessage = document.querySelector('.success');
-      removeSuccessHandlers();
 
       if (evt.code === 'Escape') {
+        removeSuccessHandlers();
         successMessage.remove();
       }
     },
     onSuccessClick: function (evt) {
       var successMessage = document.querySelector('.success');
-      removeSuccessHandlers();
 
       if (evt.target === evt.currentTarget) {
+        removeSuccessHandlers();
         successMessage.remove();
       }
     },

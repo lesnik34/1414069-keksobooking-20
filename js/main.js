@@ -8,6 +8,9 @@
       var houseType = document.querySelector('#type');
       var timeIn = document.querySelector('#timein');
       var timeOut = document.querySelector('#timeout');
+      var adFormSubmit = document.querySelector('.ad-form__submit');
+      var adFormReset = document.querySelector('.ad-form__reset');
+      var mapFilters = document.querySelector('.map__filters');
 
       window.announcement.enableForm();
       window.interactivity.enableMap();
@@ -20,6 +23,9 @@
       houseType.addEventListener('change', window.dialog.onchangeHouseType);
       timeIn.addEventListener('change', window.dialog.onchangeTimeIn);
       timeOut.addEventListener('change', window.dialog.onchangeTimeOut);
+      adFormSubmit.addEventListener('click', window.dialog.onPublishClick);
+      adFormReset.addEventListener('click', window.dialog.onResetClick);
+      mapFilters.addEventListener('change', window.dialog.onchangeFilters);
 
       window.backend.load(window.data.loadHandler, window.data.errorHandler);
     },
@@ -29,7 +35,9 @@
       var houseType = document.querySelector('#type');
       var timeIn = document.querySelector('#timein');
       var timeOut = document.querySelector('#timeout');
-
+      var adFormSubmit = document.querySelector('.ad-form__submit');
+      var adFormReset = document.querySelector('.ad-form__reset');
+      var mapFilters = document.querySelector('.map__filters');
 
       window.interactivityActions.deletePins();
       window.announcement.disableForm();
@@ -46,6 +54,9 @@
       window.removeEventListener('keydown', window.dialog.onCardPressEsc);
       timeIn.removeEventListener('change', window.dialog.onchangeTimeIn);
       timeOut.removeEventListener('change', window.dialog.onchangeTimeOut);
+      adFormSubmit.removeEventListener('click', window.dialog.onPublishClick);
+      adFormReset.removeEventListener('click', window.dialog.onResetClick);
+      mapFilters.removeEventListener('onchange', window.dialog.onchangeFilters);
     }
   };
 

@@ -58,7 +58,6 @@
   var LOAD_URL = 'https://javascript.pages.academy/keksobooking/data';
   var UPLOAD_URL = 'https://javascript.pages.academy/keksobooking';
   var MAX_PINS_COUNT = 5;
-
   var loadData = [];
 
   window.options = {

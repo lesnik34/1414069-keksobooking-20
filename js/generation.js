@@ -1,6 +1,10 @@
 'use strict';
 
 (function () {
+  var CARD_PHOTO_WIDTH = 45;
+  var CARD_PHOTO_HEIGHT = 40;
+  var FORM_PHOTO_WIDTH = 70;
+  var FORM_PHOTO_HEIGHT = 70;
 
   window.generation = {
     renderPins: function (hotels) {
@@ -30,8 +34,6 @@
       });
     },
     addPhotos: function (photos, cardClone) {
-      var PHOTO_WIDTH = 45;
-      var PHOTO_HEIGHT = 40;
       var popupPhotos = cardClone.querySelector('.popup__photos');
 
       popupPhotos.innerHTML = '';
@@ -41,12 +43,23 @@
 
         housePhoto.src = photo;
         housePhoto.className = 'popup__photo';
-        housePhoto.width = PHOTO_WIDTH;
-        housePhoto.height = PHOTO_HEIGHT;
+        housePhoto.width = CARD_PHOTO_WIDTH;
+        housePhoto.height = CARD_PHOTO_HEIGHT;
         housePhoto.alt = 'Фотография жилья';
 
         popupPhotos.appendChild(housePhoto);
       });
+    },
+    addFormPhotos: function (source) {
+      var housePhoto = document.createElement('img');
+      var adFormPhoto = document.querySelector('.ad-form__photo');
+
+      housePhoto.src = source;
+      housePhoto.alt = 'Фотография жилья';
+      housePhoto.width = FORM_PHOTO_WIDTH;
+      housePhoto.height = FORM_PHOTO_HEIGHT;
+
+      adFormPhoto.appendChild(housePhoto);
     }
   };
 

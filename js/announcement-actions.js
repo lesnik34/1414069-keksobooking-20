@@ -64,6 +64,16 @@
       mapPinMain.style.top = window.options.DEFAULT_PIN_LOCATION.top + 'px';
       window.announcementActions.setActiveAddress();
       window.main.deactivatePage();
+    },
+    setDefaultAvatar: function () {
+      var avatar = document.querySelector('.ad-form-header__preview').querySelector('img');
+
+      avatar.src = window.options.DEFAULT_AVATAR;
+    },
+    clearAdPhotos: function () {
+      var adFormPhoto = document.querySelector('.ad-form__photo');
+
+      adFormPhoto.innerHTML = '';
     }
   };
 })();

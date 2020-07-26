@@ -79,6 +79,11 @@
       var massageClone = errorMassage.cloneNode(true);
 
       main.appendChild(massageClone);
+    },
+    resetFilter: function () {
+      var mapFilters = document.querySelector('.map__filters');
+
+      mapFilters.reset();
     }
   };
 

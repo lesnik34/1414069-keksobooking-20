@@ -47,6 +47,24 @@
   var STATUS_CODE = {
     OK: 200
   };
+  var HOUSING_PRICE_RANGE = {
+    'high': {
+      min: 50000,
+      max: Number.MAX_VALUE
+    },
+    'middle': {
+      min: 10000,
+      max: 50000
+    },
+    'low': {
+      min: 0,
+      max: 10000
+    },
+    'any': {
+      min: 0,
+      max: Number.MAX_VALUE
+    }
+  };
 
   var PIN_WIDTH_HALF = 25;
   var PIN_HEIGHT = 70;
@@ -81,7 +99,9 @@
     TIMEOUT_IN_MS: TIMEOUT_IN_MS,
     LOAD_URL: LOAD_URL,
     UPLOAD_URL: UPLOAD_URL,
+    MAX_PINS_COUNT: MAX_PINS_COUNT,
     STATUS_CODE: STATUS_CODE,
+    HOUSING_PRICE_RANGE: HOUSING_PRICE_RANGE,
     PRICE_PER_TYPE: PRICE_PER_TYPE,
     MAX_PINS_COUNT: MAX_PINS_COUNT,
     DEFAULT_AVATAR: DEFAULT_AVATAR,

@@ -17,6 +17,8 @@
     window.removeEventListener('keydown', window.dialog.onErrorPressEsc);
   };
 
+  var debouncedUpdatePins = window.debounce(window.util.updatePins);
+
   window.dialog = {
     onMainPinClick: function (evt) {
       if (evt.button === 0) {
@@ -160,6 +162,7 @@
 
         reader.readAsDataURL(file);
       }
+      debouncedUpdatePins(window.options.loadData);
     }
   };
 

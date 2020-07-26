@@ -35,10 +35,10 @@
       var filteredHotels = hotels.filter(function (hotel) {
 
         if (housingType.value === 'any') {
-          return true
+          return true;
         }
-        return hotel.offer.type === housingType.value
-      })
+        return hotel.offer.type === housingType.value;
+      });
 
       window.generation.renderPins(filteredHotels.slice(0, window.options.MAX_PINS_COUNT));
     }

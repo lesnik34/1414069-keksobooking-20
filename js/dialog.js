@@ -162,6 +162,7 @@
 
         reader.readAsDataURL(file);
       }
+      debouncedUpdatePins(window.options.loadData);
     }
   };
 

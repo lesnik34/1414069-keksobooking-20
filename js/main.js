@@ -51,6 +51,8 @@
       window.announcementActions.setDisabledAddress();
       window.announcementActions.changeCapacityStatus();
       window.announcementActions.activateAvailableOption();
+      window.announcementActions.setDefaultAvatar();
+      window.announcementActions.clearAdPhotos();
 
       mapPinMain.addEventListener('mousedown', window.onMouseDown);
       mapPinMain.addEventListener('keydown', window.dialog.onMapPinPressEnter);

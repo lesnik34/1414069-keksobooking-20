@@ -17,6 +17,8 @@
     window.removeEventListener('keydown', window.dialog.onErrorPressEsc);
   };
 
+  var debouncedUpdatePins = window.debounce(window.util.updatePins);
+
   window.dialog = {
     onMainPinClick: function (evt) {
       if (evt.button === 0) {
@@ -120,7 +122,7 @@
       }
     },
     onFiltersChange: function () {
-      window.util.updatePins(window.options.loadData);
+      debouncedUpdatePins(window.options.loadData);
     }
   };
 

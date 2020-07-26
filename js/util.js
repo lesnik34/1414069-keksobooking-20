@@ -2,6 +2,40 @@
 
 (function () {
 
+  var isTypeInclude = function (hotel) {
+    var housingType = document.querySelector('#housing-type');
+
+    return hotel.offer.type === housingType.value || housingType.value === 'any';
+  };
+
+  var isPriceInclude = function (hotel) {
+    var housingPrice = document.querySelector('#housing-price');
+    var priceMinRange = window.options.HOUSING_PRICE_RANGE[housingPrice.value].min;
+    var priceMaxRange = window.options.HOUSING_PRICE_RANGE[housingPrice.value].max;
+
+    return hotel.offer.price >= priceMinRange && hotel.offer.price <= priceMaxRange;
+  };
+
+  var isRoomsInclude = function (hotel) {
+    var housingRooms = document.querySelector('#housing-rooms');
+
+    return hotel.offer.rooms.toString() === housingRooms.value || housingRooms.value === 'any';
+  };
+
+  var isGuestsInclude = function (hotel) {
+    var housingGuests = document.querySelector('#housing-guests');
+
+    return hotel.offer.guests.toString() === housingGuests.value || housingGuests.value === 'any';
+  };
+
+  var isFeaturesIncludes = function (hotel) {
+    var housingFeatures = document.querySelector('#housing-features').querySelectorAll('input:checked');
+
+    return Array.from(housingFeatures).every(function (feature) {
+      return hotel.offer.features.includes(feature.value);
+    });
+  };
+
   window.util = {
     disableElements: function (elements) {
       elements.forEach(function (element) {
@@ -27,17 +61,14 @@
       }
     },
     updatePins: function (hotels) {
-      var housingType = document.querySelector('#housing-type');
 
       window.interactivityActions.deletePins();
       window.util.closeCard();
 
       var filteredHotels = hotels.filter(function (hotel) {
 
-        if (housingType.value === 'any') {
-          return true;
-        }
-        return hotel.offer.type === housingType.value;
+        return isTypeInclude(hotel) && isPriceInclude(hotel) && isRoomsInclude(hotel) && isGuestsInclude(hotel) && isFeaturesIncludes(hotel);
+
       });
 
       window.generation.renderPins(filteredHotels.slice(0, window.options.MAX_PINS_COUNT));

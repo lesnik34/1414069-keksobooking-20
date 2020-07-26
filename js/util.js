@@ -30,16 +30,10 @@
 
   var isFeaturesIncludes = function (hotel) {
     var housingFeatures = document.querySelector('#housing-features').querySelectorAll('input:checked');
-    var isInclude = true;
 
-    for (var i = 0; i < housingFeatures.length; i++) {
-      if (!hotel.offer.features.includes(housingFeatures[i].value)) {
-        isInclude = false;
-        break;
-      }
-    }
-
-    return isInclude;
+    return Array.from(housingFeatures).every(function (feature) {
+      return hotel.offer.features.includes(feature.value);
+    });
   };
 
   window.util = {
@@ -73,20 +67,7 @@
 
       var filteredHotels = hotels.filter(function (hotel) {
 
-        if (!isTypeInclude(hotel)) {
-          return false;
-        }
-        if (!isPriceInclude(hotel)) {
-          return false;
-        }
-        if (!isRoomsInclude(hotel)) {
-          return false;
-        }
-        if (!isGuestsInclude(hotel)) {
-          return false;
-        }
-
-        return isFeaturesIncludes(hotel);
+        return isTypeInclude(hotel) && isPriceInclude(hotel) && isRoomsInclude(hotel) && isGuestsInclude(hotel) && isFeaturesIncludes(hotel);
 
       });
 

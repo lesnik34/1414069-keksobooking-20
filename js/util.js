@@ -13,7 +13,7 @@
     var priceMinRange = window.options.HOUSING_PRICE_RANGE[housingPrice.value].min;
     var priceMaxRange = window.options.HOUSING_PRICE_RANGE[housingPrice.value].max;
 
-    return hotel.offer.price >= priceMinRange && hotel.offer.price <= priceMaxRange
+    return hotel.offer.price >= priceMinRange && hotel.offer.price <= priceMaxRange;
   };
 
   var isRoomsInclude = function (hotel) {
@@ -33,11 +33,14 @@
     var isInclude = true;
 
     for (var i = 0; i < housingFeatures.length; i++) {
-      if (!hotel.offer.features.includes(housingFeatures[i].value)) {isInclude = false; break;}
+      if (!hotel.offer.features.includes(housingFeatures[i].value)) {
+        isInclude = false;
+        break;
+      }
     }
 
     return isInclude;
-  }
+  };
 
   window.util = {
     disableElements: function (elements) {
@@ -70,10 +73,18 @@
 
       var filteredHotels = hotels.filter(function (hotel) {
 
-        if (!isTypeInclude(hotel)) {return false}
-        if (!isPriceInclude(hotel)) {return false}
-        if (!isRoomsInclude(hotel)) {return false}
-        if (!isGuestsInclude(hotel)) {return false}
+        if (!isTypeInclude(hotel)) {
+          return false;
+        }
+        if (!isPriceInclude(hotel)) {
+          return false;
+        }
+        if (!isRoomsInclude(hotel)) {
+          return false;
+        }
+        if (!isGuestsInclude(hotel)) {
+          return false;
+        }
 
         return isFeaturesIncludes(hotel);
 

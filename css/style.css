@@ -793,6 +793,10 @@ fieldset {
 
   background-color: #e4e4de;
   border-radius: 5px;
+
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 70px 70px 70px;
 }
 
 .ad-form__element--submit {

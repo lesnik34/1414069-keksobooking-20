@@ -57,7 +57,7 @@
   var TIMEOUT_IN_MS = 10000;
   var LOAD_URL = 'https://javascript.pages.academy/keksobooking/data';
   var UPLOAD_URL = 'https://javascript.pages.academy/keksobooking';
-
+  var MAX_PINS_COUNT = 5;
   var loadData = [];
 
   window.options = {
@@ -80,6 +80,7 @@
     UPLOAD_URL: UPLOAD_URL,
     STATUS_CODE: STATUS_CODE,
     PRICE_PER_TYPE: PRICE_PER_TYPE,
+    MAX_PINS_COUNT: MAX_PINS_COUNT,
     loadData: loadData
   };
 

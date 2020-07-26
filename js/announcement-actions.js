@@ -63,6 +63,7 @@
       mapPinMain.style.left = window.options.DEFAULT_PIN_LOCATION.left + 'px';
       mapPinMain.style.top = window.options.DEFAULT_PIN_LOCATION.top + 'px';
       window.announcementActions.setActiveAddress();
+      window.main.deactivatePage();
     }
   };
 })();

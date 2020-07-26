@@ -6,7 +6,7 @@
     loadHandler: function (loadData) {
       var changedData = window.util.addDataId(loadData);
 
-      window.generation.renderPins(changedData);
+      window.util.updatePins(changedData);
       window.options.loadData = changedData;
     },
     uploadHandler: function () {

@@ -55,14 +55,14 @@
         window.announcementActions.activateAvailableOption();
       });
     },
-    onchangeHouseType: function () {
+    onHouseTypeChange: function () {
       var houseType = document.querySelector('#type');
       var housePrice = document.querySelector('#price');
 
       housePrice.placeholder = window.options.PRICE_PER_TYPE[houseType.value];
       housePrice.min = window.options.PRICE_PER_TYPE[houseType.value];
     },
-    onchangeTimeIn: function () {
+    onTimeInChange: function () {
       var timeIn = document.querySelector('#timein');
       var timeOut = document.querySelector('#timeout');
       var timeValue = timeIn.value;
@@ -70,7 +70,7 @@
 
       timeOutCurrentOption.selected = true;
     },
-    onchangeTimeOut: function () {
+    onTimeOutChange: function () {
       var timeIn = document.querySelector('#timein');
       var timeOut = document.querySelector('#timeout');
       var timeValue = timeOut.value;
@@ -119,6 +119,9 @@
         successMessage.remove();
       }
     },
+    onFiltersChange: function () {
+      window.util.updatePins(window.options.loadData);
+    }
   };
 
 })();

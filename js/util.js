@@ -25,6 +25,22 @@
       if (mapCard) {
         mapCard.remove();
       }
+    },
+    updatePins: function (hotels) {
+      var housingType = document.querySelector('#housing-type');
+
+      window.interactivityActions.deletePins();
+      window.util.closeCard();
+
+      var filteredHotels = hotels.filter(function (hotel) {
+
+        if (housingType.value === 'any') {
+          return true;
+        }
+        return hotel.offer.type === housingType.value;
+      });
+
+      window.generation.renderPins(filteredHotels.slice(0, window.options.MAX_PINS_COUNT));
     }
   };
 

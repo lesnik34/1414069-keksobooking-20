@@ -20,9 +20,9 @@
       mapPinMain.removeEventListener('keydown', window.dialog.onMapPinPressEnter);
 
       mapPins.addEventListener('click', window.dialog.onPinClick);
-      houseType.addEventListener('change', window.dialog.onHouseTypeChange);
-      timeIn.addEventListener('change', window.dialog.onTimeInChange);
-      timeOut.addEventListener('change', window.dialog.onTimeOutChange);
+      houseType.addEventListener('change', window.dialog.onchangeHouseType);
+      timeIn.addEventListener('change', window.dialog.onchangeTimeIn);
+      timeOut.addEventListener('change', window.dialog.onchangeTimeOut);
       adFormSubmit.addEventListener('click', window.dialog.onPublishClick);
       adFormReset.addEventListener('click', window.dialog.onResetClick);
       mapFilters.addEventListener('change', window.dialog.onFiltersChange);

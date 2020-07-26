@@ -120,7 +120,7 @@
       }
     },
     onFiltersChange: function () {
-      window.util.updatePins(window.options.loadData);
+      window.debounce(window.util.updatePins(window.options.loadData));
     }
   };
 

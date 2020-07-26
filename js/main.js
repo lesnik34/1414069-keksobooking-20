@@ -53,6 +53,7 @@
       window.announcementActions.activateAvailableOption();
       window.announcementActions.setDefaultAvatar();
       window.announcementActions.clearAdPhotos();
+      window.interactivityActions.resetFilter();
 
       mapPinMain.addEventListener('mousedown', window.onMouseDown);
       mapPinMain.addEventListener('keydown', window.dialog.onMapPinPressEnter);

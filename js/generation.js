@@ -47,6 +47,19 @@
 
         popupPhotos.appendChild(housePhoto);
       });
+    },
+    addFormPhotos: function (source) {
+      var housePhoto = document.createElement('img');
+      var adFormPhoto = document.querySelector('.ad-form__photo');
+      var PHOTO_WIDTH = 70;
+      var PHOTO_HEIGHT = 70;
+
+      housePhoto.src = source;
+      housePhoto.alt = 'Фотография жилья';
+      housePhoto.width = PHOTO_WIDTH;
+      housePhoto.height = PHOTO_HEIGHT;
+
+      adFormPhoto.appendChild(housePhoto);
     }
   };
 

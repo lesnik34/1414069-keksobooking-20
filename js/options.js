@@ -58,6 +58,8 @@
   var LOAD_URL = 'https://javascript.pages.academy/keksobooking/data';
   var UPLOAD_URL = 'https://javascript.pages.academy/keksobooking';
   var MAX_PINS_COUNT = 5;
+
+  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
   var loadData = [];
 
   window.options = {
@@ -81,6 +83,7 @@
     STATUS_CODE: STATUS_CODE,
     PRICE_PER_TYPE: PRICE_PER_TYPE,
     MAX_PINS_COUNT: MAX_PINS_COUNT,
+    FILE_TYPES: FILE_TYPES,
     loadData: loadData
   };
 

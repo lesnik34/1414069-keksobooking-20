@@ -29,7 +29,7 @@
       }
     },
     onPinClick: function (evt) {
-      if (evt.target.tagName === 'BUTTON' && evt.target.querySelector('img').dataset.pinIndex) {
+      if (evt.target.tagName === 'BUTTON' && evt.target.classList.contains('map__pin') && evt.target.querySelector('img').dataset.pinIndex) {
         currentPin = evt.target;
 
         window.interactivityActions.activateCard(currentPin);
@@ -121,6 +121,45 @@
     },
     onFiltersChange: function () {
       window.util.updatePins(window.options.loadData);
+    },
+    onAvatarChange: function () {
+      var fileChooser = document.querySelector('.ad-form-header__input');
+      var preview = document.querySelector('.ad-form-header__preview').querySelector('img');
+      var file = fileChooser.files[0];
+      var fileName = file.name.toLowerCase();
+
+      var matches = window.options.FILE_TYPES.some(function (it) {
+        return fileName.endsWith(it);
+      });
+
+      if (matches) {
+        var reader = new FileReader();
+
+        reader.addEventListener('load', function () {
+          preview.src = reader.result;
+        });
+
+        reader.readAsDataURL(file);
+      }
+    },
+    onHouseImagesChange: function () {
+      var fileChooser = document.querySelector('#images');
+      var file = fileChooser.files[0];
+      var fileName = file.name.toLowerCase();
+
+      var matches = window.options.FILE_TYPES.some(function (it) {
+        return fileName.endsWith(it);
+      });
+
+      if (matches) {
+        var reader = new FileReader();
+
+        reader.addEventListener('load', function () {
+          window.generation.addFormPhotos(reader.result);
+        });
+
+        reader.readAsDataURL(file);
+      }
     }
   };
 

@@ -1,19 +1,19 @@
 'use strict';
 
 (function () {
+  var mapPinMain = document.querySelector('.map__pin--main');
+  var mapPins = document.querySelector('.map__pins');
+  var houseType = document.querySelector('#type');
+  var timeIn = document.querySelector('#timein');
+  var timeOut = document.querySelector('#timeout');
+  var adFormSubmit = document.querySelector('.ad-form__submit');
+  var adFormReset = document.querySelector('.ad-form__reset');
+  var mapFilters = document.querySelector('.map__filters');
+  var avatar = document.querySelector('#avatar');
+  var images = document.querySelector('#images');
+
   window.main = {
     activatePage: function () {
-      var mapPinMain = document.querySelector('.map__pin--main');
-      var mapPins = document.querySelector('.map__pins');
-      var houseType = document.querySelector('#type');
-      var timeIn = document.querySelector('#timein');
-      var timeOut = document.querySelector('#timeout');
-      var adFormSubmit = document.querySelector('.ad-form__submit');
-      var adFormReset = document.querySelector('.ad-form__reset');
-      var mapFilters = document.querySelector('.map__filters');
-      var avatar = document.querySelector('#avatar');
-      var images = document.querySelector('#images');
-
       window.announcement.changeFormStatus();
       window.announcement.changeFormElementsStatus();
       window.interactivity.changeMapState();
@@ -34,17 +34,6 @@
       window.backend.load(window.data.loadHandler, window.data.errorHandler);
     },
     deactivatePage: function (isBeginning) {
-      var mapPinMain = document.querySelector('.map__pin--main');
-      var mapPins = document.querySelector('.map__pins');
-      var houseType = document.querySelector('#type');
-      var timeIn = document.querySelector('#timein');
-      var timeOut = document.querySelector('#timeout');
-      var adFormSubmit = document.querySelector('.ad-form__submit');
-      var adFormReset = document.querySelector('.ad-form__reset');
-      var mapFilters = document.querySelector('.map__filters');
-      var avatar = document.querySelector('#avatar');
-      var images = document.querySelector('#images');
-
       if (!isBeginning) {
         window.interactivity.changeMapState();
         window.announcement.changeFormStatus();
@@ -60,7 +49,6 @@
       window.announcementActions.clearAdPhotos();
       window.interactivityActions.resetFilter();
 
-      mapPinMain.addEventListener('mousedown', window.onMouseDown);
       mapPinMain.addEventListener('keydown', window.dialog.onMapPinPressEnter);
 
       mapPins.removeEventListener('click', window.dialog.onPinClick);
@@ -77,6 +65,7 @@
   };
 
   window.main.deactivatePage(true);
+  mapPinMain.addEventListener('mousedown', window.onMouseDown);
   window.dialog.chainRoomNumberAmountGuests();
 })();
 

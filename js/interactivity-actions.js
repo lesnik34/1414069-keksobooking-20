@@ -60,9 +60,13 @@
       var currentData = window.options.loadData[currentPin.querySelector('img').dataset.pinIndex];
 
       if (mapCard) {
+        var previousPin = document.querySelector('.map__pin--active');
+
+        previousPin.classList.remove('map__pin--active');
         mapCard.remove();
       }
 
+      currentPin.classList.add('map__pin--active');
       window.generation.renderCard(currentData);
       addCardActions();
     },

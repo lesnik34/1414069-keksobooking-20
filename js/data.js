@@ -8,9 +8,11 @@
 
       window.util.updatePins(changedData);
       window.options.loadData = changedData;
+
+      window.interactivity.changeFiltersState();
+      window.interactivity.changeFiltersState();
     },
     uploadHandler: function () {
-      window.main.deactivatePage();
       window.announcementActions.resetAd();
       window.interactivityActions.activateSuccessMassage();
 

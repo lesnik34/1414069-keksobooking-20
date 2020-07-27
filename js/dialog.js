@@ -21,12 +21,16 @@
 
   window.dialog = {
     onMainPinClick: function (evt) {
-      if (evt.button === 0) {
+      var isMapDeactivated = document.querySelector('.map').classList.contains('map--faded');
+
+      if (evt.button === 0 && isMapDeactivated) {
         window.main.activatePage();
       }
     },
     onMapPinPressEnter: function (evt) {
-      if (evt.code === 'Enter') {
+      var isMapDeactivated = document.querySelector('.map').classList.contains('map--faded');
+
+      if (evt.code === 'Enter' && isMapDeactivated) {
         window.main.activatePage();
       }
     },
@@ -82,9 +86,21 @@
     },
     onPublishClick: function (evt) {
       var adForm = document.querySelector('.ad-form');
+      var requiredFields = document.querySelectorAll('input:required');
 
       evt.preventDefault();
-      window.backend.save(new FormData(adForm), window.data.uploadHandler, window.data.uploadErrorHandler);
+      window.util.removeFormErrors();
+
+      for (var i = 0; i < requiredFields.length; i++) {
+        if (!requiredFields[i].value) {
+          requiredFields[i].style.borderColor = 'red';
+          break;
+        }
+
+        if (i === requiredFields.length - 1) {
+          window.backend.save(new FormData(adForm), window.data.uploadHandler, window.data.uploadErrorHandler);
+        }
+      }
     },
     onErrorPressEsc: function (evt) {
       var errorMessage = document.querySelector('.error');
@@ -104,6 +120,8 @@
     },
     onResetClick: function () {
       window.announcementActions.resetAd();
+      window.util.closeCard();
+      window.util.removeFormErrors();
     },
     onSuccessPressEsc: function (evt) {
       var successMessage = document.querySelector('.success');
@@ -124,9 +142,9 @@
     onFiltersChange: function () {
       debouncedUpdatePins(window.options.loadData);
     },
-    onAvatarChange: function () {
-      var fileChooser = document.querySelector('.ad-form-header__input');
+    onFormImagesChange: function (evt) {
       var preview = document.querySelector('.ad-form-header__preview').querySelector('img');
+      var fileChooser = evt.target;
       var file = fileChooser.files[0];
       var fileName = file.name.toLowerCase();
 
@@ -138,26 +156,11 @@
         var reader = new FileReader();
 
         reader.addEventListener('load', function () {
-          preview.src = reader.result;
-        });
-
-        reader.readAsDataURL(file);
-      }
-    },
-    onHouseImagesChange: function () {
-      var fileChooser = document.querySelector('#images');
-      var file = fileChooser.files[0];
-      var fileName = file.name.toLowerCase();
-
-      var matches = window.options.FILE_TYPES.some(function (it) {
-        return fileName.endsWith(it);
-      });
-
-      if (matches) {
-        var reader = new FileReader();
-
-        reader.addEventListener('load', function () {
-          window.generation.addFormPhotos(reader.result);
+          if (fileChooser.classList.contains('ad-form-header__input')) {
+            preview.src = reader.result;
+          } else {
+            window.generation.addFormPhotos(reader.result);
+          }
         });
 
         reader.readAsDataURL(file);

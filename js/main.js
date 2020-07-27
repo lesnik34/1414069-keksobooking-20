@@ -14,9 +14,10 @@
       var avatar = document.querySelector('#avatar');
       var images = document.querySelector('#images');
 
-      window.announcement.enableForm();
-      window.interactivity.enableMap();
-      window.announcementActions.setActiveAddress();
+      window.announcement.changeFormStatus();
+      window.announcement.changeFormElementsStatus();
+      window.interactivity.changeMapState();
+      window.announcementActions.setAddress();
 
       mapPinMain.removeEventListener('mousedown', window.dialog.onMainPinClick);
       mapPinMain.removeEventListener('keydown', window.dialog.onMapPinPressEnter);
@@ -28,12 +29,12 @@
       adFormSubmit.addEventListener('click', window.dialog.onPublishClick);
       adFormReset.addEventListener('click', window.dialog.onResetClick);
       mapFilters.addEventListener('change', window.dialog.onFiltersChange);
-      avatar.addEventListener('change', window.dialog.onAvatarChange);
-      images.addEventListener('change', window.dialog.onHouseImagesChange);
+      avatar.addEventListener('change', window.dialog.onFormImagesChange);
+      images.addEventListener('change', window.dialog.onFormImagesChange);
 
       window.backend.load(window.data.loadHandler, window.data.errorHandler);
     },
-    deactivatePage: function () {
+    deactivatePage: function (isBeginning) {
       var mapPinMain = document.querySelector('.map__pin--main');
       var mapPins = document.querySelector('.map__pins');
       var houseType = document.querySelector('#type');
@@ -45,10 +46,15 @@
       var avatar = document.querySelector('#avatar');
       var images = document.querySelector('#images');
 
+      if (!isBeginning) {
+        window.interactivity.changeMapState();
+        window.announcement.changeFormStatus();
+      }
+
+      window.interactivity.changeFiltersState();
+      window.announcement.changeFormElementsStatus();
       window.interactivityActions.deletePins();
-      window.announcement.disableForm();
-      window.interactivity.disableMap();
-      window.announcementActions.setDisabledAddress();
+      window.announcementActions.setAddress();
       window.announcementActions.changeCapacityStatus();
       window.announcementActions.activateAvailableOption();
       window.announcementActions.setDefaultAvatar();
@@ -66,12 +72,12 @@
       adFormSubmit.removeEventListener('click', window.dialog.onPublishClick);
       adFormReset.removeEventListener('click', window.dialog.onResetClick);
       mapFilters.removeEventListener('onchange', window.dialog.onFiltersChange);
-      avatar.removeEventListener('change', window.dialog.onAvatarChange);
-      images.removeEventListener('change', window.dialog.onHouseImagesChange);
+      avatar.removeEventListener('change', window.dialog.onFormImagesChange);
+      images.removeEventListener('change', window.dialog.onFormImagesChange);
     }
   };
 
-  window.main.deactivatePage();
+  window.main.deactivatePage(true);
   window.dialog.chainRoomNumberAmountGuests();
 })();
 

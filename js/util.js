@@ -57,21 +57,49 @@
       var mapCard = document.querySelector('.map__card');
 
       if (mapCard) {
+        var currentPin = document.querySelector('.map__pin--active');
+
+        if (currentPin) {
+          currentPin.classList.remove('map__pin--active');
+        }
+
         mapCard.remove();
       }
     },
     updatePins: function (hotels) {
+      var conformityCounter = 0;
+      var filteredHotels = [];
 
       window.interactivityActions.deletePins();
       window.util.closeCard();
 
-      var filteredHotels = hotels.filter(function (hotel) {
+      for (var i = 0; i < hotels.length; i++) {
+        if (isTypeInclude(hotels[i]) && isPriceInclude(hotels[i]) && isRoomsInclude(hotels[i]) && isGuestsInclude(hotels[i]) && isFeaturesIncludes(hotels[i])) {
+          conformityCounter++;
+          filteredHotels.push(hotels[i]);
+        }
+        if (conformityCounter === window.options.MAX_PINS_COUNT) {
+          break;
+        }
+      }
 
-        return isTypeInclude(hotel) && isPriceInclude(hotel) && isRoomsInclude(hotel) && isGuestsInclude(hotel) && isFeaturesIncludes(hotel);
+      window.generation.renderPins(filteredHotels);
+    },
+    getSelectedElements: function () {
+      var roomNumber = document.querySelector('#room_number');
 
+      var selectedElementIndex = roomNumber.selectedIndex;
+      var options = roomNumber.options;
+      var selectedOption = options[selectedElementIndex];
+
+      return selectedOption.value;
+    },
+    removeFormErrors: function () {
+      var requiredFields = document.querySelectorAll('input:required');
+
+      requiredFields.forEach(function (element) {
+        element.style = '';
       });
-
-      window.generation.renderPins(filteredHotels.slice(0, window.options.MAX_PINS_COUNT));
     }
   };
 

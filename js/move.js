@@ -43,7 +43,7 @@
         mapPinMain.style.left = leftCoordinates + 'px';
       }
 
-      window.announcementActions.setActiveAddress();
+      window.announcementActions.setAddress();
     };
 
     var onMouseUp = function (upEvt) {
@@ -60,7 +60,7 @@
         mapPinMain.addEventListener('click', onClickPreventDefault);
       }
 
-      window.announcementActions.setActiveAddress();
+      window.announcementActions.setAddress();
     };
 
     document.addEventListener('mousemove', onMouseMove);

@@ -3,31 +3,27 @@
 (function () {
 
   window.announcement = {
-    enableForm: function () {
+    changeFormStatus: function () {
       var adForm = document.querySelector('.ad-form');
-      var inputs = adForm.querySelectorAll('input');
-      var selects = adForm.querySelectorAll('select');
-      var description = adForm.querySelector('#description');
 
-      adForm.classList.remove('ad-form--disabled');
-
-      window.util.enableElements(inputs);
-      window.util.enableElements(selects);
-      description.disabled = false;
+      adForm.classList.toggle('ad-form--disabled');
     },
-    disableForm: function () {
+    changeFormElementsStatus: function () {
       var adForm = document.querySelector('.ad-form');
       var inputs = adForm.querySelectorAll('input');
       var selects = adForm.querySelectorAll('select');
       var description = adForm.querySelector('#description');
+      var isFormDisabled = adForm.classList.contains('ad-form--disabled');
 
-      if (!adForm.classList.contains('ad-form--disabled')) {
-        adForm.classList.add('ad-form--disabled');
+      if (isFormDisabled) {
+        window.util.disableElements(inputs);
+        window.util.disableElements(selects);
+      } else {
+        window.util.enableElements(inputs);
+        window.util.enableElements(selects);
       }
 
-      window.util.disableElements(inputs);
-      window.util.disableElements(selects);
-      description.disabled = true;
+      description.disabled = isFormDisabled;
     }
   };
 

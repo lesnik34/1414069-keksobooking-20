@@ -92,7 +92,7 @@
       window.util.removeFormErrors();
 
       for (var i = 0; i < requiredFields.length; i++) {
-        if (!requiredFields[i].value) {
+        if (!window.util.isFieldFit(requiredFields[i])) {
           requiredFields[i].style.borderColor = 'red';
           break;
         }

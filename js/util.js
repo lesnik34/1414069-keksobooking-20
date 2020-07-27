@@ -100,6 +100,16 @@
       requiredFields.forEach(function (element) {
         element.style = '';
       });
+    },
+    isFieldFit: function (field) {
+      if (field.name === 'title') {
+        return field.value.length >= field.minLength && field.value.length <= field.maxLength;
+      }
+      if (field.name === 'price') {
+        return parseInt(field.value, 10) >= parseInt(field.min, 10) && parseInt(field.value, 10) <= parseInt(field.max, 10);
+      }
+
+      return true;
     }
   };
 

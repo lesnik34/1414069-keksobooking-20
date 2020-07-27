@@ -19,7 +19,6 @@
       window.interactivity.changeMapState();
       window.announcementActions.setAddress();
 
-      mapPinMain.removeEventListener('mousedown', window.dialog.onMainPinClick);
       mapPinMain.removeEventListener('keydown', window.dialog.onMapPinPressEnter);
 
       mapPins.addEventListener('click', window.dialog.onPinClick);

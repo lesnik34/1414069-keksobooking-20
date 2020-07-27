@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var capacity = document.querySelector('#capacity');
+  var capacityOptions = Array.from(capacity.querySelectorAll('option'));
 
   window.announcementActions = {
     setAddress: function () {
@@ -24,9 +26,6 @@
       address.value = abscissa + ', ' + ordinate;
     },
     changeCapacityStatus: function () {
-      var capacity = document.querySelector('#capacity');
-      var capacityOptions = Array.from(capacity.querySelectorAll('option'));
-
       var selectedRoomsNumber = window.util.getSelectedElements();
 
       capacityOptions.forEach(function (element) {
@@ -34,7 +33,6 @@
       });
     },
     activateAvailableOption: function () {
-      var capacity = document.querySelector('#capacity');
       var firstAvailableOption = capacity.querySelector('option:not(:disabled)');
 
       firstAvailableOption.selected = true;
